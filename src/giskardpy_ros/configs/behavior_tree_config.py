@@ -71,18 +71,19 @@ class BehaviorTreeConfig(ABC):
         """
         self.add_evaluate_debug_expressions()
         if GiskardBlackboard().tree.is_open_loop():
-            self.tree.execute_traj.base_closed_loop.publish_state.add_qp_data_publisher(
-                publish_lb=publish_lb,
-                publish_ub=publish_ub,
-                publish_lbA=publish_lbA,
-                publish_ubA=publish_ubA,
-                publish_bE=publish_bE,
-                publish_Ax=publish_Ax,
-                publish_Ex=publish_Ex,
-                publish_xdot=publish_xdot,
-                publish_weights=publish_weights,
-                publish_g=publish_g,
-                publish_debug=publish_debug)
+            pass
+            # self.tree.execute_traj.base_closed_loop.publish_state.add_qp_data_publisher(
+            #     publish_lb=publish_lb,
+            #     publish_ub=publish_ub,
+            #     publish_lbA=publish_lbA,
+            #     publish_ubA=publish_ubA,
+            #     publish_bE=publish_bE,
+            #     publish_Ax=publish_Ax,
+            #     publish_Ex=publish_Ex,
+            #     publish_xdot=publish_xdot,
+            #     publish_weights=publish_weights,
+            #     publish_g=publish_g,
+            #     publish_debug=publish_debug)
         else:
             self.tree.control_loop_branch.publish_state.add_qp_data_publisher(
                 publish_lb=publish_lb,
@@ -156,7 +157,7 @@ class BehaviorTreeConfig(ABC):
             self.tree.control_loop_branch.add_evaluate_debug_expressions(log_traj=True)
         if GiskardBlackboard().tree.is_open_loop():
             GiskardBlackboard().tree.execute_traj.prepare_base_control.add_compile_debug_expressions()
-            GiskardBlackboard().tree.execute_traj.base_closed_loop.add_evaluate_debug_expressions(log_traj=False)
+            # GiskardBlackboard().tree.execute_traj.base_closed_loop.add_evaluate_debug_expressions(log_traj=False)
 
     def add_js_publisher(self, topic_name: Optional[str] = None, include_prefix: bool = False):
         """

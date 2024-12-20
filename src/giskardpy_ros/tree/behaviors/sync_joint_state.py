@@ -1,3 +1,4 @@
+from copy import deepcopy
 from typing import Optional
 
 import rospy
@@ -29,18 +30,21 @@ class SyncJointState(GiskardBehavior):
     @profile
     def setup(self, timeout=0.0):
         wait_for_topic_to_appear(topic_name=self.joint_state_topic, supported_types=[JointState])
-        self.joint_state_sub = rospy.Subscriber(self.joint_state_topic, JointState, self.cb, queue_size=1)
+        self.joint_state_sub = rospy.Subscriber(self.joint_state_topic, JointState, self.cb, queue_size=10)
         return super().setup(timeout)
 
     def cb(self, data):
         self.data = data
+        # print(self.data)
 
     @record_time
     @profile
     def update(self):
+        # print('update')
         if self.data:
             mjs = msg_converter.ros_joint_state_to_giskard_joint_state(self.data, self.group_name)
             god_map.world.state.update(mjs)
+            # print(god_map.world.state)
             self.data = None
             return Status.SUCCESS
         return Status.RUNNING
@@ -86,6 +90,7 @@ class SyncJointStatePosition(GiskardBehavior):
     @record_time
     @profile
     def update(self):
+        # print('update')
         for joint_name, position in zip(self.msg.name, self.msg.position):
             joint_name = PrefixName(joint_name, self.group_name)
             god_map.world.state[joint_name][Derivatives.position] = position

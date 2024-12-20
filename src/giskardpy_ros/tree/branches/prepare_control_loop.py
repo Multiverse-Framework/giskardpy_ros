@@ -40,9 +40,9 @@ class PrepareBaseTrajControlLoop(Sequence):
         super().__init__(name)
         self.has_compile_debug_expressions = False
         self.add_child(CleanUpPlanning('CleanUpPlanning'))
-        self.add_child(AddBaseTrajFollowerGoal())
-        self.add_child(InitQPController('InitQPController'))
-        self.add_child(CompileMonitors(traj_tracking=True))
+        # self.add_child(AddBaseTrajFollowerGoal())
+        # self.add_child(InitQPController('InitQPController'))
+        # self.add_child(CompileMonitors(traj_tracking=True))
         self.add_child(SetTrackingStartTime('start tracking time'))
 
     def add_plot_goal_graph(self):

@@ -100,7 +100,7 @@ class SendFollowJointTrajectory(ActionClient, GiskardBehavior):
         super().initialise()
         trajectory = god_map.trajectory
         goal = FollowJointTrajectoryGoal()
-        start_time = god_map.motion_start_time
+        start_time = god_map.motion_start_time + 2
         fill_velocity_values = GiskardBlackboard().fill_trajectory_velocity_values
         if fill_velocity_values is None:
             fill_velocity_values = self.fill_velocity_values

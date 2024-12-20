@@ -66,8 +66,9 @@ class Giskard:
             additional_goal_package_paths = {'giskardpy_ros.goals'}
         for additional_path in additional_goal_package_paths:
             self.add_goal_package_name(additional_path)
+
         if additional_monitor_package_paths is None:
-            additional_monitor_package_paths = set()
+            additional_monitor_package_paths = {'giskardpy_ros.monitors'}
         for additional_path in additional_monitor_package_paths:
             self.add_monitor_package_name(additional_path)
         god_map.hack = 0
